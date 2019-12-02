@@ -22,7 +22,7 @@
     "@angular/platform-browser": "8.0.0",
     "@angular/platform-browser-dynamic": "8.0.0",
     "@angular/router": "8.0.0",
-    "@ng-bootstrap/ng-bootstrap": "4.2.1",
+    "@ng-bootstrap/ng-bootstrap": "^4.2.1",
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
     "@types/googlemaps": "^3.38.1",
@@ -33,6 +33,7 @@
     "mapbox-gl": "^1.5.1",
     "ng2-charts": "2.3.0",
     "rxjs": "6.5.2",
+    "sweetalert2": "^9.4.0",
     "tslib": "^1.9.0",
     "yarn": "1.16.0",
     "zone.js": "~0.9.1"
