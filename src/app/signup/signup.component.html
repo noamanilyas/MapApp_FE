@@ -2,7 +2,7 @@
     <div class="row justify-content-md-center">
         <div class="col-md-4">
             <img class="user-avatar" src="assets/images/logo.png" width="150px" />
-            <h1>SB Admin BS4 Angular8</h1>
+            <h1>Navajo Mapping</h1>
             <form role="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                 <div class="form-content">
                     <div class="form-group">
@@ -23,7 +23,8 @@
                         <input type="password" class="form-control input-underline input-lg" id="" placeholder="{{ 'Repeat Password' | translate }}">
                     </div> -->
                 </div>
-                <button class="btn btn-primary rounded-btn" (onClick)="onSubmit()">
+                <a [routerLink]="['/login']" class="btn rounded-btn">{{ 'Cancel' | translate }}</a>&nbsp; &nbsp;
+                <button class="btn rounded-btn" (onClick)="onSubmit()">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     {{ 'Register' | translate }}
                 </button>

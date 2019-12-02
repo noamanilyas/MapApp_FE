@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
-import  { SignupService } from './signup.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
+
+import  { SignupService } from './signup.service';
 
 @Component({
     selector: 'app-signup',
@@ -16,6 +17,7 @@ export class SignupComponent implements OnInit {
 
 	registerForm: FormGroup;
 	loading: boolean = false;
+  response: any;
 
   constructor(
   	private signupService:SignupService, 
@@ -38,7 +40,7 @@ export class SignupComponent implements OnInit {
     // this.alertService.clear();
 
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if (!this.registerForm.invalid) {
         return;
     }
 
@@ -47,21 +49,24 @@ export class SignupComponent implements OnInit {
       // .pipe(first())
       .subscribe(
         data => {
+          this.response = data;
           this.loading = false;
-        	if(data.Status) {
-        		Swal.fire(
-			        'Success',
-			        'Registeration Successfull :)',
-			        'success'
-			      )
+        	if(this.response.Status) {
+        		Swal.fire({
+			        title: 'Success',
+			        text: 'Registeration Successfull :)',
+			        icon: 'success',
+              showConfirmButton: false,
+              timer: 2000
+			      });
 	          // this.alertService.success('Registration successful', true);
 	          this.router.navigate(['/login']);
         	} else {
-        		Swal.fire(
-			        'Failed!!',
-			        data.Msg + '',
-			        'error'
-			      )
+        		Swal.fire({
+			        title: 'Failed!!',
+			        text: this.response.Msg + '',
+			        icon: 'error'
+			      });
         	}
         	
         },
