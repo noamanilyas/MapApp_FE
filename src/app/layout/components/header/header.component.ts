@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
+import { AuthenticationService } from '../../../shared/services/authentication.service';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -9,9 +10,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
+    name: string;
 
-    constructor(private translate: TranslateService, public router: Router) {
-
+    constructor(
+        private translate: TranslateService,
+        public router: Router,
+        public authenticationService: AuthenticationService) {
+        this.name = this.authenticationService.currentUserValue.name;
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
@@ -43,7 +48,8 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        this.authenticationService.logout();
+        location.reload(true);
     }
 
     changeLang(language: string) {

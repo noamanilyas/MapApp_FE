@@ -1,0 +1,26 @@
+<div class="table-responsive">
+<table class="table table table-striped table-bordered">
+  <thead>
+  <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Created Date</th>
+      <th scope="col">Access</th>
+      <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of usersData; let i = index">
+      <td>{{item.Name}}</td>
+      <td>{{item.Email}}</td>
+      <td>{{item.CreateDate | date}}</td>
+      <td>{{item.Access}}</td>
+      <td>
+        <button *ngIf="item.IsActive == 1" (click)="changeAccess(item.Id, 0)" name="button" class="btn btn-danger" id="btBlock"><i class="fa fa-times"></i> Block</button>
+        <button *ngIf="item.IsActive == 0" (click)="changeAccess(item.Id, 1)" name="button" class="btn btn-success" id="btAllow"><i class="fa fa-check"></i> Allow</button>
+      </td>
+  </tr>
+  </tbody>
+  
+</table>
+</div>

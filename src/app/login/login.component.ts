@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 import { AuthenticationService } from '../shared/services/authentication.service';
 
@@ -16,17 +16,17 @@ import { AuthenticationService } from '../shared/services/authentication.service
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  loading: boolean = false;
+  loading = false;
   returnUrl: string;
 
   constructor(
-    public router: Router, 
+    public router: Router,
     private route: ActivatedRoute,
     public authenticationService: AuthenticationService,
     private formBuilder: FormBuilder
   ) {
     // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) { 
+    if (this.authenticationService.currentUserValue) {
         this.router.navigate(['/']);
     }
   }
@@ -61,16 +61,14 @@ export class LoginComponent implements OnInit {
         data => {
           this.loading = false;
           // this.router.navigate([this.returnUrl]);
-          this.router.navigate(['dashboard']).then(result => {
-            console.log(result);
-          });
+          this.router.navigate(['structure']);
         },
         error => {
           Swal.fire(
             'Failed!!',
             'Login Failed :(',
             'error'
-          )
+          );
           // this.alertService.error(error);
           this.loading = false;
         });

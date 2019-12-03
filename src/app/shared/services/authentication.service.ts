@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+// import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { User } from '../models/user.model';
+import { UserAuth } from '../models/user.model';
 import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
+    // private currentUserSubject: BehaviorSubject<UserAuth>;
+    // public currentUser: Observable<UserAuth>;
 
     constructor(private http: HttpClient) {
-      this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-      this.currentUser = this.currentUserSubject.asObservable();
-      this.currentUserSubject.subscribe(data => {
-        console.log(data);
-      })
+      // this.currentUserSubject = new BehaviorSubject<UserAuth>(JSON.parse(localStorage.getItem('currentUser')));
+      // this.currentUser = this.currentUserSubject.asObservable();
+      // this.currentUserSubject.subscribe(data => {
+      //   console.log(data);
+      // })
     }
 
-    public get currentUserValue(): User {
+    public get currentUserValue(): UserAuth {
       // return this.currentUserSubject.value;
       return JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -32,7 +32,7 @@ export class AuthenticationService {
           if (user.Data && user.Data.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify(user.Data));
-            this.currentUserSubject.next(user.Data);
+            // this.currentUserSubject.next(user.Data);
           }
 
           return user;
@@ -42,6 +42,6 @@ export class AuthenticationService {
     logout() {
       // remove user from local storage to log user out
       localStorage.removeItem('currentUser');
-      this.currentUserSubject.next(null);
+      // this.currentUserSubject.next(null);
     }
 }

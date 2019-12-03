@@ -14,7 +14,7 @@ export class MapService {
 
 
     // and then:
-    this.http.get(`${environment.apiURL}/users/getData`, {responseType: 'blob'})
+    this.http.get(`${environment.apiURL}/home/getData`, {responseType: 'blob'})
     .subscribe(data => {
 
       let text = [];  

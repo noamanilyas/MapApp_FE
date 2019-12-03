@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { } from 'googlemaps';
-import { MapService } from './blank-page.service';
+import { MapService } from './structure.service';
 // import { ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import * as mapboxgl from 'mapbox-gl';
@@ -19,15 +18,14 @@ interface IGeoJson {
     $key?: string;
 } 
 
-declare var google
 @Component({
-    selector: 'app-blank-page',
-    templateUrl: './blank-page.component.html',
-    styleUrls: ['./blank-page.component.scss'],
+    selector: 'app-structure',
+    templateUrl: './structure.component.html',
+    styleUrls: ['./structure.component.scss'],
     providers: [MapService]
 })
 
-export class BlankPageComponent implements OnInit {
+export class StructuresComponent implements OnInit {
 	map: mapboxgl.Map;
 	// @ViewChild('mapElement', {static: false}) mapElement: ElementRef;
 

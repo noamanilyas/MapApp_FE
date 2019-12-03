@@ -33,12 +33,10 @@
 
 table{
   width: 100%;
-  display:block;
   overflow: auto;
 }
 
 tbody {
-  display:block;
   max-height:400px;
   overflow-y:auto;
 }
@@ -49,4 +47,8 @@ li {
 
 .active {
   background: #f7f7f7 !important;
+}
+
+th, td {
+  width: 30%;
 }

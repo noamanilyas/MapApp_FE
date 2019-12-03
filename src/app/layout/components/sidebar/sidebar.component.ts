@@ -14,13 +14,18 @@ export class SidebarComponent implements OnInit {
     collapsed: boolean;
     showMenu: string;
     pushRightClass: string;
+    name: string;
+    admin: boolean;
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(private translate: TranslateService, 
+    constructor(private translate: TranslateService,
         public router: Router,
         public authenticationService: AuthenticationService
         ) {
+
+        this.name = this.authenticationService.currentUserValue.name;
+        this.admin = this.authenticationService.currentUserValue.admin;
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
