@@ -1,15 +1,19 @@
 export class CSVRecord {  
-	public code: any;  
-	public lat: any;  
-	public long: any;  
-	public elevation: any;  
-	public position: any;  
-	public owner: any;     
-	public strucType: any;     
-	public height: any;     
+	public agency: any;  
+	public chapterName: any;  
+	public officeType: any;  
+	public mainContact: any;  
+	public email: any;  
+	public address: any;     
 	public city: any;     
 	public state: any;     
 	public ZIP: any;     
-	public county: any;     
+	public lat: any;     
+	public long: any;     
+	public elevation: any;     
 	public plusCode: any;     
+	public phone2: any;     
+	public nnBranch: any;     
+	public divsion: any;     
+	public chapterLGA: any;     
 } 

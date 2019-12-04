@@ -101,8 +101,8 @@ export class HousesComponent implements OnInit {
           .setPopup(new mapboxgl.Popup({ maxWidth: '525px' }) // add popups
             .setHTML(`
 	    				<div>
-	    					<h3>${marker.code} - ${marker.owner}</h3>
-	    					<embed src="http://www.americasrf.com/public_html/NNTRC/Part2Single/` + marker.code + `.pdf#toolbar=1" width="500" height="375">
+	    					<h3>${marker.chapterName} - ${marker.agency}</h3>
+	    					<embed src="http://www.americasrf.com/public_html/NNTRC/Part1Single/` + marker.chapterName.replace(/\//g, '-') + `.pdf#toolbar=1" width="500" height="375">
 	    				</div>
 	    			`))
           .addTo(map);

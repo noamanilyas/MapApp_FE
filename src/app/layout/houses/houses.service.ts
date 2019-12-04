@@ -14,7 +14,7 @@ export class MapService {
 
 
     // and then:
-    this.http.get(`${environment.apiURL}/home/getData`, { responseType: 'blob' })
+    this.http.get(`${environment.apiURL}/home/getChaptersData`, { responseType: 'blob' })
       .subscribe(data => {
 
         const text = [];
@@ -30,6 +30,7 @@ export class MapService {
           const headersRow = this.getHeaderArray(csvRecordsArray);
 
           this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+          console.log(this.records)
           cb(this.records);
         };
 
@@ -45,20 +46,24 @@ export class MapService {
 
     return csvRecordsArray.map((curruntRecord, index) => {
       curruntRecord = curruntRecord.split('\t');
-
       const csvRecord: CSVRecord = new CSVRecord();
-      csvRecord.code = curruntRecord[1] !== undefined ? curruntRecord[1].trim() : '';
-      csvRecord.lat = curruntRecord[27] !== undefined ? this.ParseDMS(curruntRecord[27].trim()) : '';
-      csvRecord.long = curruntRecord[28] !== undefined ? this.ParseDMS(curruntRecord[28].trim()) : '';
-      csvRecord.elevation = curruntRecord[30] !== undefined ? curruntRecord[30].trim() : '';
-      csvRecord.owner = curruntRecord[22] !== undefined ? curruntRecord[22].trim() : '';
-      csvRecord.strucType = curruntRecord[23] !== undefined ? curruntRecord[23].trim() : '';
-      csvRecord.height = curruntRecord[24] !== undefined ? curruntRecord[24].trim() : '';
-      csvRecord.city = curruntRecord[7] !== undefined ? curruntRecord[7].trim() : '';
-      csvRecord.state = curruntRecord[9] !== undefined ? curruntRecord[9].trim() : '';
-      csvRecord.ZIP = curruntRecord[10] !== undefined ? curruntRecord[10].trim() : '';
-      csvRecord.county = curruntRecord[11] !== undefined ? curruntRecord[11].trim() : '';
-      csvRecord.plusCode = curruntRecord[29] !== undefined ? curruntRecord[29].trim() : '';
+      csvRecord.agency = curruntRecord[1] !== undefined ? curruntRecord[1].trim() : '';
+      csvRecord.chapterName = curruntRecord[2] !== undefined ? curruntRecord[2].trim() : '';
+      csvRecord.officeType = curruntRecord[3] !== undefined ? curruntRecord[3].trim() : '';
+      csvRecord.mainContact = curruntRecord[9] !== undefined ? curruntRecord[9].trim() : '';
+      csvRecord.email = curruntRecord[43] !== undefined ? curruntRecord[43].trim() : '';
+      csvRecord.address = curruntRecord[19] !== undefined ? curruntRecord[19].trim() : '';
+      csvRecord.city = curruntRecord[20] !== undefined ? curruntRecord[20].trim() : '';
+      csvRecord.state = curruntRecord[21] !== undefined ? curruntRecord[21].trim() : '';
+      csvRecord.ZIP = curruntRecord[22] !== undefined ? curruntRecord[22].trim() : '';
+      csvRecord.lat = curruntRecord[23] !== undefined ? this.ParseDMS(curruntRecord[23].trim()) : '';
+      csvRecord.long = curruntRecord[24] !== undefined ? this.ParseDMS(curruntRecord[24].trim()) : '';
+      csvRecord.elevation = curruntRecord[25] !== undefined ? curruntRecord[25].trim() : '';
+      csvRecord.plusCode = curruntRecord[26] !== undefined ? curruntRecord[26].trim() : '';
+      csvRecord.phone2 = curruntRecord[30] !== undefined ? curruntRecord[30].trim() : '';
+      csvRecord.nnBranch = curruntRecord[31] !== undefined ? curruntRecord[31].trim() : '';
+      csvRecord.divsion = curruntRecord[32] !== undefined ? curruntRecord[32].trim() : '';
+      csvRecord.chapterLGA = curruntRecord[36] !== undefined ? curruntRecord[36].trim() : '';
 
       return csvRecord;
     });

@@ -17,34 +17,44 @@
     <table class="table table-striped table-bordered table-responsive">
       <thead>
       <tr>
-          <th>Code</th>
-          <th>Latitude Structure</th>
-          <th>Longitude Structure</th>
-          <th>Elevation Structure</th>
-          <th>Owner Structure</th>
-          <th>Structure Type</th>
-          <th>Height</th>
-          <th>City</th>
-          <th>State</th>
-          <th>ZIP</th>
-          <th>County</th>
-          <th>Plus Code</th>
+        <th>Agency</th>  
+        <th>Chapter Name</th>  
+        <th>Office Type</th>  
+        <th>Main Contact</th>  
+        <th>Email</th>  
+        <th>Eddress</th>     
+        <th>City</th>     
+        <th>State</th>     
+        <th>ZIP</th>     
+        <th>Lat</th>     
+        <th>Long</th>     
+        <th>Elevation</th>     
+        <th>Plus Code</th>     
+        <th>Phone 2</th>     
+        <th>NN Branch</th>     
+        <th>Divsion</th>     
+        <th>Chapter LGA</th>     
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let item of csvData; let i = index">
-          <td>{{item.code}}</td>
-          <td>{{item.lat}}</td>
-          <td>{{item.long}}</td>
-          <td>{{item.elevation}}</td>
-          <td>{{item.owner}}</td>
-          <td>{{item.strucType}}</td>
-          <td>{{item.height}}</td>
-          <td>{{item.city}}</td>
-          <td>{{item.state}}</td>
-          <td>{{item.ZIP}}</td>
-          <td>{{item.county}}</td>
-          <td>{{item.plusCode}}</td>
+        <td>{{item.agency}}</td> 
+        <td>{{item.chapterName}}</td> 
+        <td>{{item.officeType}}</td> 
+        <td>{{item.mainContact}}</td> 
+        <td>{{item.email}}</td> 
+        <td>{{item.address}}</td>    
+        <td>{{item.city}}</td>    
+        <td>{{item.state}}</td>    
+        <td>{{item.ZIP}}</td>    
+        <td>{{item.lat}}</td>    
+        <td>{{item.long}}</td>    
+        <td>{{item.elevation}}</td>    
+        <td>{{item.plusCode}}</td>    
+        <td>{{item.phone2}}</td>    
+        <td>{{item.nnBranch}}</td>    
+        <td>{{item.divsion}}</td>    
+        <td>{{item.chapterLGA}}</td>    
       </tr>
       </tbody>
       
