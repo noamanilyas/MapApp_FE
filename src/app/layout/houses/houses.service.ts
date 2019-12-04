@@ -30,7 +30,6 @@ export class MapService {
           const headersRow = this.getHeaderArray(csvRecordsArray);
 
           this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-          console.log(this.records)
           cb(this.records);
         };
 

@@ -79,7 +79,7 @@ export class HousesComponent implements OnInit {
     this.map = new mapboxgl.Map({
       container: this.mapElement.nativeElement,
       style: this.style,
-      zoom: 8,
+      zoom: 10,
       center: [this.lng, this.lat]
     });
 
