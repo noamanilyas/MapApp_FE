@@ -5,6 +5,7 @@
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Created Date</th>
+      <th scope="col">Reason</th>
       <th scope="col">Access</th>
       <th scope="col">Action</th>
   </tr>
@@ -14,6 +15,7 @@
       <td>{{item.Name}}</td>
       <td>{{item.Email}}</td>
       <td>{{item.CreateDate | date}}</td>
+      <td>{{item.Reason}}</td>
       <td>{{item.Access}}</td>
       <td>
         <button *ngIf="item.IsActive == 1" (click)="changeAccess(item.Id, 0)" name="button" class="btn btn-danger" id="btBlock"><i class="fa fa-times"></i> Block</button>

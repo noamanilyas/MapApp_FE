@@ -9,8 +9,15 @@
 
 <div class="tab-content">
 	<ng-container *ngIf="mapView">
+    <div id='menu'>
+        &nbsp;
+        <input id='streets-v11' (click)="switchLayer('streets-v11')" type='radio' name='rtoggle' value='streets' checked='checked'>
+        <label for='streets'>Street</label>&nbsp;
+        <input id='satellite-v9' (click)="switchLayer('satellite-v9')" type='radio' name='rtoggle' value='satellite'>
+        <label for='satellite'>Satellite</label>
+    </div>
 		<div class="map" #mapElement class="match-parent"></div>
-		</ng-container>
+	</ng-container>
 	<!-- </div> -->
 
   <div *ngIf="!mapView" class="table-responsive">

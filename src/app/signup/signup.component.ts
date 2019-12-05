@@ -29,7 +29,8 @@ export class SignupComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      reason: ['', Validators.required]
     });
   }
 
@@ -41,7 +42,7 @@ export class SignupComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-      console.log("invalid");
+      console.log('invalid');
       return;
     }
 

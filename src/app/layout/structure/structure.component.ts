@@ -7,153 +7,226 @@ import Swal from 'sweetalert2';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 interface IGeometry {
-	type: string;
-	coordinates: [number, number];
+  type: string;
+  coordinates: [number, number];
 }
 
 interface IGeoJson {
-	type: string;
-	geometry: IGeometry;
-	properties?: any;
-	$key?: string;
+  type: string;
+  geometry: IGeometry;
+  properties?: any;
+  $key?: string;
 }
 
 @Component({
-	selector: 'app-structure',
-	templateUrl: './structure.component.html',
-	styleUrls: ['./structure.component.scss'],
-	providers: [MapService]
+  selector: 'app-structure',
+  templateUrl: './structure.component.html',
+  styleUrls: ['./structure.component.scss'],
+  providers: [MapService]
 })
 
 export class StructuresComponent implements OnInit {
-	map: mapboxgl.Map;
-	// @ViewChild('mapElement', {static: false}) mapElement: ElementRef;
+  map: mapboxgl.Map;
+  // @ViewChild('mapElement', {static: false}) mapElement: ElementRef;
 
-	private mapElement: ElementRef;
-	@ViewChild('mapElement', { static: false }) set content(content: ElementRef) {
-		this.mapElement = content;
-	}
-	style = 'mapbox://styles/mapbox/streets-v11';
-	lat = 36.149278;
-	lng = -109.6824607;
-	csvData = [];
-	mapView: boolean = true;
+  private mapElement: ElementRef;
+  @ViewChild('mapElement', { static: false }) set content(content: ElementRef) {
+    this.mapElement = content;
+  }
+  style = 'mapbox://styles/mapbox/streets-v11';
+  lat = 36.149278;
+  lng = -109.6824607;
+  csvData = [];
+  mapView = true;
 
-	constructor(private mapService: MapService, private changeDetector: ChangeDetectorRef) {
-		(mapboxgl as typeof mapboxgl).accessToken = environment.mapbox.accessToken;
-	}
+  constructor(private mapService: MapService, private changeDetector: ChangeDetectorRef) {
+    (mapboxgl as typeof mapboxgl).accessToken = environment.mapbox.accessToken;
+  }
 
-	ngOnInit() {
+  ngOnInit() {
 
-		Swal.fire({
-			title: 'Loading data!',
-			text: 'Markers are loading, Please wait...',
-			onOpen: () => {
-				Swal.showLoading();
-			}
-		})
+    Swal.fire({
+      title: 'Loading data!',
+      text: 'Markers are loading, Please wait...',
+      onOpen: () => {
+        Swal.showLoading();
+      }
+    });
 
-		this.mapService.getCSVData(data => {
-			data.shift();
-			this.csvData = data;
-			// this.initMap();
-			// this.addMarkers(this.map);
-			if (this.mapView) {
-				this.initMap();
-			}
-		});
-	}
+    this.mapService.getCSVData(data => {
+      data.shift();
+      this.csvData = data;
+      // this.initMap();
+      // this.addMarkers(this.map);
+      if (this.mapView) {
+        this.initMap();
+      }
+    });
+  }
 
-	initMap() {
+  initMap() {
 
-		Swal.fire({
-			title: 'Loading data!',
-			text: 'Markers are loading, Please wait...',
-			onOpen: () => {
-				Swal.showLoading();
-			}
-		})
+    Swal.fire({
+      title: 'Loading data!',
+      text: 'Markers are loading, Please wait...',
+      onOpen: () => {
+        Swal.showLoading();
+      }
+    });
 
-		this.map = new mapboxgl.Map({
-			container: this.mapElement.nativeElement,
-			style: this.style,
-			zoom: 10,
-			center: [this.lng, this.lat]
-		});
+    this.map = new mapboxgl.Map({
+      container: this.mapElement.nativeElement,
+      style: this.style,
+      zoom: 10,
+      center: [this.lng, this.lat]
+    });
 
-		// Add map controls
-		this.map.addControl(new mapboxgl.NavigationControl())
-		this.addMarkers(this.map);
+    // Add map controls
+    this.map.addControl(new mapboxgl.NavigationControl());
+    this.addMarkers(this.map);
 
-	}
+  }
 
-	addMarkers(map) {
-		// add markers to map
-		this.csvData.forEach((marker, index) => {
-			// make a marker for each feature and add to the map
-			if (!isNaN(marker.lat) && !isNaN(marker.long)) {
+  switchLayer(mapStye) {
+    this.map.setStyle('mapbox://styles/mapbox/' + mapStye);
+  }
 
-				// console.log(marker)
-				new mapboxgl.Marker()
-					.setLngLat([marker.long, marker.lat])
-					.setPopup(new mapboxgl.Popup({ maxWidth: '525px' }) // add popups
-						.setHTML(`
-	    				<div>
-	    					<h3>${marker.code} - ${marker.owner}</h3>
-	    					<embed src="http://www.americasrf.com/public_html/NNTRC/Part2Single/`+ marker.code + `.pdf#toolbar=1" width="500" height="375">
-	    				</div>
-	    			`))
-					.addTo(map);
-			}
-			if (index === this.csvData.length - 1)
-				Swal.close();
-		});
-	}
+  // tslint:disable-next-line:indent
+  addMarkers(map) {
+    // add markers to map
+    this.csvData.forEach((marker, index) => {
+      // make a marker for each feature and add to the map
+      if (!isNaN(marker.lat) && !isNaN(marker.long)) {
 
-	changeView(view) {
-		if (view === 'map') {
-			this.mapView = true;
-			this.changeDetector.detectChanges();
-			this.initMap()
-		} else if (view === 'list') {
-			this.mapView = false;
-		}
-	}
+        // console.log(marker)
+        new mapboxgl.Marker()
+          .setLngLat([marker.long, marker.lat])
+          .setPopup(new mapboxgl.Popup({ maxWidth: '525px' }) // add popups
+            .setHTML(`
+              <div>
+                <h3>${marker.code} - ${marker.owner}</h3>
+                <embed src="http://www.americasrf.com/public_html/NNTRC/Part2Single/` + marker.code + `.pdf#toolbar=1" width="500" height="375">
+              </div>
+            `))
+          .addTo(map);
+      }
+      if (index === this.csvData.length - 1) {
+        Swal.close();
+      }
+    });
+  }
 
+  changeView(view) {
+    if (view === 'map') {
+      this.mapView = true;
+      this.changeDetector.detectChanges();
+      this.initMap();
+    } else if (view === 'list') {
+      this.mapView = false;
+    }
+  }
 
-	// const coords=[];
-	// const coordsturf=[];
-	// someFeatures = [{
-	// 	"type": "Feature",
-	// 	"properties": {
-	// 		"name": "Coors Field",
-	// 		"show_on_map": true
-	// 	},
-	// 	"geometry": {
-	// 		"type": "Point",
-	// 		"coordinates": [-111.630286111111 , 36.69755 ]
-	// 	}
-	// }];
+  // clusterInit() {
+  //   this.map = new mapboxgl.Map({
+  //     container: this.mapElement.nativeElement,
+  //     style: this.style,
+  //     zoom: 10,
+  //     center: [this.lng, this.lat]
+  //   });
 
+  //   this.map.on('load', function () {
+  //     // Add a new source from our GeoJSON data and set the
+  //     // 'cluster' option to true. GL-JS will add the point_count property to your source data.
+  //     this.map.addSource('earthquakes', {
+  //       type: 'geojson',
+  //       // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
+  //       // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+  //       data: 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
+  //       cluster: true,
+  //       clusterMaxZoom: 14, // Max zoom to cluster points on
+  //       clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+  //     });
 
-	// function onEachFeature(feature, layer) {
-	// 	// does this feature have a property named popupContent?
-	// //coordsturf.push(turf.point(feature.geometry.coordinates));
-	// var div= $('<div id="yassin" style="width:500px; height:500px;"><svg/></div>')[0];  
-	//  var div0= $('<div><object data="test.pdf" type="application/pdf" width="100%" height="100%">alt: <a href="test.pdf"> test.pdf</a></div>')[0];  
-	// div0.appendChild(div);
+  //     this.map.addLayer({
+  //       id: 'clusters',
+  //       type: 'circle',
+  //       source: 'earthquakes',
+  //       filter: ['has', 'point_count'],
+  //       paint: {
+  //         // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+  //         // with three steps to implement three types of circles:
+  //         //   * Blue, 20px circles when point count is less than 100
+  //         //   * Yellow, 30px circles when point count is between 100 and 750
+  //         //   * Pink, 40px circles when point count is greater than or equal to 750
+  //         'circle-color': [
+  //           'step',
+  //           ['get', 'point_count'],
+  //           '#51bbd6',
+  //           100,
+  //           '#f1f075',
+  //           750,
+  //           '#f28cb1'
+  //         ],
+  //         'circle-radius': [
+  //           'step',
+  //           ['get', 'point_count'],
+  //           20,
+  //           100,
+  //           30,
+  //           750,
+  //           40
+  //         ]
+  //       }
+  //     });
 
-	//  		layer.bindPopup(div0);
-	// layer.openPopup();
-	// //var svg=d3.select("div svg").attr("width",400).attr("height",400);
-	// console.log(div0);
+  //     this.map.addLayer({
+  //       id: 'cluster-count',
+  //       type: 'symbol',
+  //       source: 'earthquakes',
+  //       filter: ['has', 'point_count'],
+  //       layout: {
+  //         'text-field': '{point_count_abbreviated}',
+  //         'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+  //         'text-size': 12
+  //       }
+  //     });
 
+  //     this.map.addLayer({
+  //       id: 'unclustered-point',
+  //       type: 'circle',
+  //       source: 'earthquakes',
+  //       filter: ['!', ['has', 'point_count']],
+  //       paint: {
+  //         'circle-color': '#11b4da',
+  //         'circle-radius': 4,
+  //         'circle-stroke-width': 1,
+  //         'circle-stroke-color': '#fff'
+  //       }
+  //     });
 
+  //     // inspect a cluster on click
+  //     this.map.on('click', 'clusters', function (e) {
+  //       const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
+  //       const clusterId = features[0].properties.cluster_id;
+  //       this.map.getSource('earthquakes').getClusterExpansionZoom(clusterId, function (err, zoom) {
+  //         if (err) {
+  //           return;
+  //         }
 
-	// }
-	// customlayer=L.geoJSON(someFeatures, {	onEachFeature: onEachFeature});
+  //         this.map.easeTo({
+  //           center: features[0].geometry.coordinates,
+  //           zoom: zoom
+  //         });
+  //       });
+  //     });
 
-	// customlayer.addTo(map);
-	// map.fitBounds(customlayer.getBounds());
+  //     this.map.on('mouseenter', 'clusters', function () {
+  //       this.map.getCanvas().style.cursor = 'pointer';
+  //     });
+  //     this.map.on('mouseleave', 'clusters', function () {
+  //       this.map.getCanvas().style.cursor = '';
+  //     });
 
+  //   });
+  // }
 }

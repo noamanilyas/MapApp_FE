@@ -3,6 +3,14 @@
   height: 800px;
 }
 
+#menu {
+  position: absolute;
+  background:#f7f7f7;
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+  z-index: 1111;
+  }
+
 .marker {
   background-size: cover;
   width: 50px;

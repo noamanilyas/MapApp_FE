@@ -89,14 +89,28 @@ export class HousesComponent implements OnInit {
 
   }
 
+  switchLayer(mapStye) {
+    this.map.setStyle('mapbox://styles/mapbox/' + mapStye);
+  }
+
   addMarkers(map) {
     // add markers to map
     this.csvData.forEach((marker, index) => {
       // make a marker for each feature and add to the map
       if (!isNaN(marker.lat) && !isNaN(marker.long)) {
 
+        const el = document.createElement('div');
+        el.className = 'marker';
+        el.style.backgroundImage = 'url(https://placekitten.com/g/40/40/)';
+        el.style.width = '40px';
+        el.style.height = '40px';
+
+        // el.addEventListener('click', function() {
+        // window.alert(marker.properties.message);
+        // });
+
         // console.log(marker)
-        new mapboxgl.Marker()
+        new mapboxgl.Marker(el)
           .setLngLat([marker.long, marker.lat])
           .setPopup(new mapboxgl.Popup({ maxWidth: '525px' }) // add popups
             .setHTML(`

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', Validators.required]
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParamMap['returnUrl'] || '/';
@@ -59,14 +59,24 @@ export class LoginComponent implements OnInit {
       // .pipe(first())
       .subscribe(
         data => {
-          this.loading = false;
-          // this.router.navigate([this.returnUrl]);
-          this.router.navigate(['structure']);
+          console.log(data);
+          if (data.Status === 0) {
+            Swal.fire(
+              'Login Failed!!',
+              data.Msg,
+              'error'
+            );
+          } else if (data.Status === 1) {
+            this.loading = false;
+            // this.router.navigate([this.returnUrl]);
+            this.router.navigate(['structure']);
+          }
         },
         error => {
+          console.log('login error:', error);
           Swal.fire(
-            'Failed!!',
-            'Login Failed :(',
+            'Login Failed!!',
+            'Email or password incorrect.',
             'error'
           );
           // this.alertService.error(error);
