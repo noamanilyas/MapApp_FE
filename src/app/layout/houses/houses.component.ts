@@ -99,18 +99,14 @@ export class HousesComponent implements OnInit {
       // make a marker for each feature and add to the map
       if (!isNaN(marker.lat) && !isNaN(marker.long)) {
 
-        const el = document.createElement('div');
-        el.className = 'marker';
-        el.style.backgroundImage = 'url(https://placekitten.com/g/40/40/)';
-        el.style.width = '40px';
-        el.style.height = '40px';
-
-        // el.addEventListener('click', function() {
-        // window.alert(marker.properties.message);
-        // });
+        // const el = document.createElement('div');
+        // el.className = 'marker';
+        // el.style.backgroundImage = 'url(https://placekitten.com/g/40/40/)';
+        // el.style.width = '40px';
+        // el.style.height = '40px';
 
         // console.log(marker)
-        new mapboxgl.Marker(el)
+        new mapboxgl.Marker()
           .setLngLat([marker.long, marker.lat])
           .setPopup(new mapboxgl.Popup({ maxWidth: '525px' }) // add popups
             .setHTML(`

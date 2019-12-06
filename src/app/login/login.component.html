@@ -1,8 +1,11 @@
 <div class="login-page" [@routerTransition]>
     <div class="row justify-content-md-center">
-        <div class="col-md-4">
-            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
-            <h1>Navajo Mapping</h1>
+        <div class="col-md-6">
+            <img src="assets/images/webLogo.jpg" width="250px" height="100px" class="user-avatar" />
+            <br>
+            <br>
+            <h2>Navajo Nation - NNTRC - IT &</h2>
+            <h2>Telecommunications Assessment</h2>
             <form role="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-content">
                     <div class="form-group">
@@ -13,6 +16,7 @@
                         <input type="password" formControlName="password" class="form-control input-underline input-lg" id="" placeholder="{{ 'Password' | translate }}">
                     </div>
                 </div>
+                <br>
                 <a class="btn rounded-btn" [routerLink]="['/signup']">{{ 'Register' | translate }}</a>
                 &nbsp;
                 <button class="btn rounded-btn" (onClick)="onSubmit()">
@@ -21,5 +25,19 @@
                 </button>
             </form>
         </div>
+        
+    </div>
+    <br>
+    <br>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img src="assets/images/stamp.png" width="150px" class="user-avatar" />
+        </div>
+        <p>DISCLAIMER
+                THE INFORMATION CONTAINED IN THIS SET OF DOCUMENTS IS PROPRIETARY BY NATURE, ANY USE OR DISCLOSURE OTHER THAN THAT WHICH RELATES TO CUSTOMER IS STRICTLY PROHIBITED
+                 
+                COPYRIGHT
+                © 2019, Navajo Nation, Navajo Nation Telecommunications regulatory Commission, and  Americas Communications LLC 
+        </p>
     </div>
 </div>

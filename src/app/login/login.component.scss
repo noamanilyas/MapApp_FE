@@ -1,4 +1,4 @@
-$topnav-background-color: #222;
+$topnav-background-color:#fbfbfb;
 :host {
     display: block;
 }
@@ -11,7 +11,7 @@ $topnav-background-color: #222;
     overflow: auto;
     background: $topnav-background-color;
     text-align: center;
-    color: #fff;
+    color: #607d8b;
     padding: 3em;
     .col-lg-4 {
         padding: 0;
@@ -27,19 +27,19 @@ $topnav-background-color: #222;
         background: 0 0;
         border: none;
         box-shadow: none;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-        color: #fff;
+        border-bottom: 2px solid #2196F3 ;
+        color: #3c3c3c;
         border-radius: 0;
     }
     .input-underline:focus {
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid #2196F3;
         box-shadow: none;
     }
     .rounded-btn {
         -webkit-border-radius: 50px;
         border-radius: 50px;
         color: rgba(255, 255, 255, 0.8);
-        background: $topnav-background-color;
+        background: #2196f3;
         border: 2px solid rgba(255, 255, 255, 0.8);
         font-size: 18px;
         line-height: 40px;
@@ -54,6 +54,10 @@ $topnav-background-color: #222;
         outline: none;
     }
 
+    h2 {
+        color: #2196f3;
+    }
+
     h1 {
         font-weight: 300;
         margin-top: 20px;
@@ -64,32 +68,37 @@ $topnav-background-color: #222;
         }
     }
 
+    p {
+        margin-top: 10vh;
+        font-size: x-small;
+    }
+
     .form-group {
         padding: 8px 0;
         input::-webkit-input-placeholder {
-            color: rgba(255, 255, 255, 0.6) !important;
+            color: #607d8b !important;
         }
 
         input:-moz-placeholder {
             /* Firefox 18- */
-            color: rgba(255, 255, 255, 0.6) !important;
+            color: #607d8b !important;
         }
 
         input::-moz-placeholder {
             /* Firefox 19+ */
-            color: rgba(255, 255, 255, 0.6) !important;
+            color: #607d8b !important;
         }
 
         input:-ms-input-placeholder {
-            color: rgba(255, 255, 255, 0.6) !important;
+            color: #607d8b !important;
         }
     }
     .form-content {
         padding: 40px 0;
     }
     .user-avatar {
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
+        -webkit-border-radius: 20%;
+        border-radius: 20%;
         border: 2px solid #fff;
     }
 }
