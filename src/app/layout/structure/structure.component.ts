@@ -98,8 +98,14 @@ export class StructuresComponent implements OnInit {
       // make a marker for each feature and add to the map
       if (!isNaN(marker.lat) && !isNaN(marker.long)) {
 
+        const el = document.createElement('div');
+        el.className = 'marker';
+        el.style.backgroundImage = 'url(assets/images/button.png)';
+        el.style.width = '16px';
+        el.style.height = '16px';
+
         // console.log(marker)
-        new mapboxgl.Marker()
+        new mapboxgl.Marker(el)
           .setLngLat([marker.long, marker.lat])
           .setPopup(new mapboxgl.Popup({ maxWidth: '525px' }) // add popups
             .setHTML(`
